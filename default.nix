@@ -10,14 +10,7 @@ stdenv.mkDerivation rec{
     sha256 = "CaXDCJVmMKYcTaJ3yCCUcuoAk+zRAmFJ8Jiy2q7xn5E=";
   };
 
-  sourceRoot = ".";
-
   dontUnpack = true;
-
-  unpackPhase = ''
-    chmod u+rwx $src
-    patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/
-  '';
 
   installPhase = '' 
     mkdir -p $out
@@ -25,5 +18,7 @@ stdenv.mkDerivation rec{
     chmod u+rwx $out/$installFile
     patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/$installFile
     $out/$installFile --mode unattended --prefix $out
+    mv $out/ti-cgt-c2000_${version}/* $out
+    rm -r $out/ti-cgt-c2000_${version}
   '';
 }
