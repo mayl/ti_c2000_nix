@@ -1,4 +1,4 @@
-{patchelf, stdenv, fetchurl, lib, ...}:
+{patchelf, stdenv, fetchurl, ...}:
 stdenv.mkDerivation rec{
   pname = "ti_c2000";
   version = "20.12.0.STS";
