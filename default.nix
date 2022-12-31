@@ -19,6 +19,7 @@ stdenv.mkDerivation rec{
     patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/$installFile
     $out/$installFile --mode unattended --prefix $out
     mv $out/ti-cgt-c2000_${version}/* $out
+    ln $out/bin/cl2000 $out/bin/cl2000.exe
     rm -r $out/ti-cgt-c2000_${version}
   '';
 }
