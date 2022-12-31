@@ -16,7 +16,7 @@ stdenv.mkDerivation rec{
     mkdir -p $out
     cp $src $out/$installFile
     chmod u+rwx $out/$installFile
-    patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/$installFile
+    patchelf --set-interpreter ${stdenv.cc.bintools.dynamicLinker} $out/$installFile
     $out/$installFile --mode unattended --prefix $out
     mv $out/ti-cgt-c2000_${version}/* $out
     ln $out/bin/cl2000 $out/bin/cl2000.exe
