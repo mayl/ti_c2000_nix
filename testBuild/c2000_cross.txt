@@ -1,0 +1,25 @@
+[binaries]
+c = 'cl2000'
+ar = 'ar2000'
+strip = 'cl2000'
+
+[host_machine]
+system='bare metal'
+cpu_family = 'c2000'
+cpu = 'c28x'
+endian = 'little'
+
+[built_in options]
+c_args = [ 
+    '-v28',
+    '-ml',
+    '-mt' ]
+c_link_args = [
+    '-z',
+    '--rom_model',
+    '\28004x_generic_flash_lnk.cmd']
+cpp_args = []
+cpp_link_args = []
+
+[properties]
+needs_exe_wrapper = true
