@@ -9,13 +9,17 @@
   outputs = { self, nixpkgs, flake-utils }: 
   flake-utils.lib.eachDefaultSystem( system:
     let pkgs = nixpkgs.legacyPackages.${system}; in
-    rec{
+    {
       packages.ti_c2000 = pkgs.callPackage ( import ./default.nix ){};
 
       devShell = pkgs.mkShell {
-        buildInputs = [packages.ti_c2000];
+        buildInputs = [
+          self.packages.${system}.ti_c2000
+          pkgs.meson
+          pkgs.ninja
+        ];
       };
 
-      defaultPackage = packages.ti_c2000;
+      defaultPackage = self.packages.${system}.ti_c2000;
     });
 }
